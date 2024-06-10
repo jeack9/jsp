@@ -22,10 +22,12 @@ public class AppTest {
 		std.setPhone("010-000-000");
 		std.setBldType("B");
 //		sqlSession.insert("co.yedam.mapper.StudentMapper.insertStudent", std);
+//		mapper.insertStudent(std);
 		
 		std.setPhone("123-000-789");
 //		sqlSession.update("co.yedam.mapper.StudentMapper.updateStudent", std);
 		mapper.updateStudent(std);
+		mapper.deleteStudent(std);
 		sqlSession.commit();
 		
 		List<Student> list = 
