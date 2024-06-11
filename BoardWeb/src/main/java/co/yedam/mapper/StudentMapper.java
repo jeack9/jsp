@@ -12,4 +12,7 @@ public interface StudentMapper {
 	public int updateStudent(Student student);
 	
 	public int deleteStudent(Student student);
+	
+	// 단건 조회.
+	public Student getStudent(String stdNo);
 }

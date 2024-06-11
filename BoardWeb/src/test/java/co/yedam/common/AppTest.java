@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import co.yedam.mapper.BoardMapper;
 import co.yedam.mapper.StudentMapper;
+import co.yedam.vo.BoardVO;
 import co.yedam.vo.Student;
 
 public class AppTest {
@@ -34,6 +36,12 @@ public class AppTest {
 							 //sqlSession.selectList("co.yedam.mapper.StudentMapper.selectStudent");
 							 mapper.selectStudent();
 		for(Student ele : list) {
+			System.out.println(ele.toString());
+		}
+		
+		BoardMapper bmapper = sqlSession.getMapper(BoardMapper.class);
+		List<BoardVO> boardList = bmapper.boardList();
+		for(BoardVO ele : boardList) {
 			System.out.println(ele.toString());
 		}
 	}
