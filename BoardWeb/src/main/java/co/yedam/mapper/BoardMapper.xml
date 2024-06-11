@@ -9,5 +9,22 @@
 		from board_tbl
 		order by board_no
 	</select>
-	
+	<insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
+		insert into board_tbl(board_no, title, content, writer)
+		values (board_seq.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	<update id="updateBoard" parameterType="co.yedam.vo.BoardVO">
+		update board_tbl
+		set title = #{title}, content = #{content}, writer = #{writer}, CREATION_DATE = SYSDATE
+		where board_no = #{boardNo}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		delete from board_tbl
+		where board_no = #{boardNo}
+	</delete>
+	<select id="getBoard" parameterType="int" resultType="co.yedam.vo.BoardVO">
+		select *
+		from board_tbl
+		where board_no = #{boardNo}
+	</select>
 </mapper>

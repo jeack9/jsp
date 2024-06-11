@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.common.Control;
+import co.yedam.web.AddBoard;
 import co.yedam.web.AddStudent;
 import co.yedam.web.BoardList;
+import co.yedam.web.DeleteBoard;
+import co.yedam.web.GetBoard;
 import co.yedam.web.MainControl;
 import co.yedam.web.ProductControl;
 import co.yedam.web.StudentForm;
+import co.yedam.web.UpdateBoard;
 
 // front -> 요청 url -> 실행컨트롤 매칭.
 //객체생성 -> init -> service -> destroy
@@ -35,6 +39,10 @@ public class FrontController extends HttpServlet{
 		
 		// 게시글목록
 		map.put("/boardList.do", new BoardList());
+		map.put("/addBoard.do", new AddBoard()); //글등록
+		map.put("/deleteBoard.do", new DeleteBoard());//글삭제
+		map.put("/updateBoard.do", new UpdateBoard()); //글수정
+		map.put("/getBoard.do", new GetBoard()); //단건 조회
 		
 	}
 	
