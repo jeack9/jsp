@@ -40,7 +40,7 @@ public class AppTest {
 		}
 		
 		BoardMapper bmapper = sqlSession.getMapper(BoardMapper.class);
-		List<BoardVO> boardList = bmapper.boardList();
+		List<BoardVO> boardList = bmapper.boardListPaging(3);
 		for(BoardVO ele : boardList) {
 			System.out.println(ele.toString());
 		}

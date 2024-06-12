@@ -15,6 +15,7 @@ public class AddBoard implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		BoardService svc = new BoardServiceImpl();
 		
 		BoardVO board = new BoardVO();

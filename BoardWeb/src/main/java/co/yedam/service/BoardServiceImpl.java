@@ -12,10 +12,15 @@ public class BoardServiceImpl implements BoardService {
 	SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 	@Override
-	public List<BoardVO> boardList() {
-		return mapper.boardList();
+	public List<BoardVO> boardList(int page) {
+		return mapper.boardListPaging(page);
 	}
-
+	
+	@Override
+	public int boardTotal() {
+		return mapper.getTotalCnt();
+	}
+	
 	@Override
 	public boolean insertBoard(BoardVO bvo) {
 		return mapper.insertBoard(bvo) == 1;

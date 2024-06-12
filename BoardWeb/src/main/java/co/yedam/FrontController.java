@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.common.Control;
 import co.yedam.web.AddBoard;
 import co.yedam.web.AddStudent;
+import co.yedam.web.BoardForm;
 import co.yedam.web.BoardList;
 import co.yedam.web.DeleteBoard;
 import co.yedam.web.GetBoard;
@@ -39,6 +40,7 @@ public class FrontController extends HttpServlet{
 		
 		// 게시글목록
 		map.put("/boardList.do", new BoardList());
+		map.put("/boardForm.do", new BoardForm()); // 글등록화면
 		map.put("/addBoard.do", new AddBoard()); //글등록
 		map.put("/deleteBoard.do", new DeleteBoard());//글삭제
 		map.put("/updateBoard.do", new UpdateBoard()); //글수정

@@ -11,23 +11,19 @@
 <%
 	} 
 %>
-<form action="addStudent.do" method="get">
+<form action="addBoard.do" method="post">
 	<table class="table">
 	  <tr>
-	  	<th>학생번호</th>
-	  	<td><input type="text" name="sno"></td>
+	  	<th>제목</th>
+	  	<td><input type="text" name="title"></td>
 	  </tr>
 	  <tr>
-	  	<th>학생이름</th>
-	  	<td><input type="text" name="sname"></td>
+	  	<th>작성자</th>
+	  	<td><input type="text" name="writer"></td>
 	  </tr>
 	  <tr>
-	  	<th>연락처</th>
-	  	<td><input type="text" name="phone"></td>
-	  </tr>
-	  <tr>
-	  	<th>혈액형</th>
-	  	<td><input type="text" name="btype"></td>
+	  	<th>내용</th>
+	  	<td><textarea rows="3" cols="60" name="content"></textarea></td>
 	  </tr>
 	  <tr>
 	    <td colspan="2" align="center">

@@ -9,6 +9,21 @@
 		from board_tbl
 		order by board_no
 	</select>
+	<select id="boardListPaging" parameterType="int" resultType="co.yedam.vo.BoardVO">
+		SELECT b.*
+		FROM(SELECT ROWNUM rn, a.*
+		     FROM (SELECT *
+		           FROM board_tbl
+		           order by board_no) a
+		     <![CDATA[
+		     where ROWNUM <= (#{page} * 5) ) b
+		     ]]>		     
+		WHERE b.rn > (#{page} - 1) * 5
+	</select>
+	<select id="getTotalCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM board_tbl
+	</select>
 	<insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
 		insert into board_tbl(board_no, title, content, writer)
 		values (board_seq.nextval, #{title}, #{content}, #{writer})
@@ -23,7 +38,12 @@
 		where board_no = #{boardNo}
 	</delete>
 	<select id="getBoard" parameterType="int" resultType="co.yedam.vo.BoardVO">
-		select *
+		select board_no,
+		       title,
+		       content,
+		       writer,
+		       click_cnt,
+		       creation_date
 		from board_tbl
 		where board_no = #{boardNo}
 	</select>
