@@ -1,9 +1,7 @@
-<%@page import="co.yedam.common.PageDTO"%>
-<%@page import="co.yedam.vo.BoardVO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../public/header.jsp" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="../public/header.jsp" />
 <style>
 .center {
   text-align: center;
@@ -28,16 +26,10 @@
   color: white;
   border: 1px solid #4CAF50;
 }
-
 .pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 
-<%
-  // request jsp의 내장객체
-  List<BoardVO> list = (List<BoardVO>)request.getAttribute("boardList");
-  PageDTO pageDTO = (PageDTO) request.getAttribute("paging");
-%>
-<p><%= pageDTO.toString() %></p>
+<p>${paging.toString()}</p>
 <h3>게시글 목록</h3>
 <table class="table">
   <thead>
@@ -46,33 +38,38 @@
     </tr>
   </thead>
   <tbody>
-  	<%for(BoardVO vo : list){%>
+	<c:forEach var="bvo" items="${requestScope.boardList}">
     <tr>
-      <td><%=vo.getBoardNo() %></td>
-      <td><a href="getBoard.do?boardNo=<%=vo.getBoardNo()%>&page=<%=pageDTO.getCurrpage()%>"><%=vo.getTitle() %></a></td>
-      <td><%=vo.getWriter() %></td>
-      <td><%=vo.getClickCnt() %></td>
+      <td>${bvo.boardNo}</td>
+      <td><a href="getBoard.do?boardNo=${bvo.boardNo}&page=${paging.currPage}">${bvo.title}</a></td>
+      <td>${bvo.writer}</td>
+      <td>${bvo.clickCnt}</td>
     </tr>
-    <%} %>
+	</c:forEach>
   </tbody>
 </table>
 <div class="center">
   <div class="pagination">
-  <%if(pageDTO.isPrev()){ %>
-  <a href="boardList.do?page=<%=pageDTO.getStartPage() - 1%>">&laquo;</a>
-  <%} %>
+  <!-- 10페이지 이전 버튼 [<<] -->
+  <c:if test="${requestScope.paging.prev }">
+  <a href="boardList.do?page=${paging.startPage - 1 }">&laquo;</a>
+  </c:if>
+  <!-- 10페이징 버튼 생성 [1],[2],[3].... -->
+  <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage }">
+  <c:choose>
+    <c:when test="${p == paging.currPage}">
+  	<a href="boardList.do?page=${p}" class="active">${p}</a>  
+    </c:when>
+    <c:otherwise>
+    <a href="boardList.do?page=${p}">${p}</a>
+    </c:otherwise>
+  </c:choose>
+  </c:forEach>
+  <!-- 10페이지 이후 버튼 [>>] -->
+  <c:if test="${paging.next}">
+  <a href="boardList.do?page=${paging.endPage + 1}">&raquo;</a>
+  </c:if>
   
-  <%for(int p = pageDTO.getStartPage(); p <= pageDTO.getEndPage(); p++){ %>
-  <%  if(p == pageDTO.getCurrpage()){%>
-  <a href="boardList.do?page=<%=p %>" class="active"><%=p %></a>
-  <%  }else {%>
-  <a href="boardList.do?page=<%=p %>"><%=p %></a>
-  <%  } 
-    } %>
-  
-  <%if(pageDTO.isNext()){ %>
-  <a href="boardList.do?page=<%=pageDTO.getEndPage() + 1%>">&raquo;</a>
-  <%} %>
   </div>
 </div>
-<%@include file="../public/footer.jsp" %>
+<jsp:include page="../public/footer.jsp" />

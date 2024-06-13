@@ -15,9 +15,11 @@ public class UpdateBoard implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = new BoardVO();
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+		int page = Integer.parseInt(req.getParameter("page"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");
@@ -28,7 +30,7 @@ public class UpdateBoard implements Control {
 		
 		if(svc.updateBoard(board)) {
 			System.out.println("게시글 업데이트..");
-			resp.sendRedirect("boardList.do");
+			resp.sendRedirect("boardList.do?page=" + page);
 		}else {
 			System.out.println("게시글 업데이트 실패");
 			resp.sendRedirect("boardList.do");

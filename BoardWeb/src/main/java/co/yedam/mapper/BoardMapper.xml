@@ -14,7 +14,7 @@
 		FROM(SELECT ROWNUM rn, a.*
 		     FROM (SELECT *
 		           FROM board_tbl
-		           order by board_no) a
+		           order by board_no DESC) a
 		     <![CDATA[
 		     where ROWNUM <= (#{page} * 5) ) b
 		     ]]>		     
@@ -46,5 +46,11 @@
 		       creation_date
 		from board_tbl
 		where board_no = #{boardNo}
+	</select>
+	<select id="selectMember" resultType="int">
+		select count(1)
+		from member_tbl
+		where user_id = #{id}
+		and user_pw = #{pw}
 	</select>
 </mapper>

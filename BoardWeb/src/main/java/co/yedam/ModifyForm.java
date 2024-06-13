@@ -1,4 +1,4 @@
-package co.yedam.web;
+package co.yedam;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import co.yedam.service.BoardService;
 import co.yedam.service.BoardServiceImpl;
 import co.yedam.vo.BoardVO;
 
-public class RemoveForm implements Control {
+public class ModifyForm implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class RemoveForm implements Control {
 		req.setAttribute("board", board);
 		req.setAttribute("currPage", currPage);
 		
-		req.getRequestDispatcher("WEB-INF/view/removeForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/view/modifyForm.jsp").forward(req, resp);
 	}
 
 }
