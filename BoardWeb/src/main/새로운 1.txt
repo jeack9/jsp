@@ -1,0 +1,81 @@
+DROP TABLE board_tbl purge;
+DROP SEQUENCE board_seq;
+-- 회원아이디/비밀번호/이름/권한
+CREATE TABLE member_tbl(
+  user_id VARCHAR2(20) PRIMARY KEY,
+  user_pw VARCHAR2(20) NOT NULL,
+  user_name VARCHAR2(100) NOT NULL,
+  responsibility VARCHAR2(10) DEFAULT 'User' -- User/Admin
+);
+INSERT INTO member_tbl(user_id, user_pw, user_name)
+VALUES ('user01', '1111', '홍길동');
+INSERT INTO member_tbl(user_id, user_pw, user_name)
+VALUES ('user02', '1111', '김민수');
+INSERT INTO member_tbl(user_id, user_pw, user_name)
+VALUES ('user03', '1111', '박석민');
+INSERT INTO member_tbl(user_id, user_pw, user_name, responsibility)
+VALUES ('user99', '1111', '최민수', 'Admin');
+
+SELECT *
+FROM member_tbl; 
+
+CREATE TABLE board_tbl(
+  board_no NUMBER,
+  title VARCHAR2(100) NOT NULL,
+  content VARCHAR2(500) NOT NULL,
+  writer VARCHAR2(30) NOT NULL,
+  click_cnt NUMBER default 0,
+  creation_date DATE default SYSDATE
+);
+CREATE SEQUENCE board_seq;
+ALTER TABLE board_tbl add constraint board_pk primary key(board_no);
+INSERT INTO board_tbl (board_no, title, content, writer)
+VALUES (board_seq.nextval, 'JSP', 'jsp 어렵', 'user01');
+INSERT INTO board_tbl (board_no, title, content, writer)
+VALUES (board_seq.nextval, '컨트롤', '컨트롤 굳', 'user00');
+INSERT INTO board_tbl (board_no, title, content, writer)
+VALUES (board_seq.nextval, 'Servlet', '서블릿 중요', 'user08');
+INSERT INTO board_tbl (board_no, title, content, writer)
+VALUES (board_seq.nextval, 'sql', 'sql 중요', 'user05');
+INSERT INTO board_tbl (board_no, title, content, writer)
+VALUES (board_seq.nextval, 'javascript', '자바스크립트 중요', 'user05');
+
+
+INSERT INTO board_tbl (board_no, title, content, writer)
+select board_seq.nextval, title, content, writer
+from board_tbl;
+
+UPDATE board_tbl
+SET title = board_no || '-' ||  title;
+
+commit;
+
+select *
+from board_tbl
+order by 1;
+
+-- 1페이지당 5개
+SELECT b.*
+FROM(SELECT ROWNUM rn, a.*
+     FROM (SELECT *
+           FROM board_tbl
+           order by board_no) a
+     where ROWNUM <= (:page * 5) ) b
+WHERE b.rn > (:page - 1) * 5;
+
+-- 페이지 개수
+SELECT count(*)
+FROM board_tbl;
+
+-- 검색기능
+SELECT b.*
+FROM(SELECT ROWNUM rn, a.*
+     FROM (SELECT *
+           FROM board_tbl
+           WHERE title like '%a%'
+           order by board_no DESC) a
+     where ROWNUM <= (:page * 5) ) b
+WHERE b.rn > (:page - 1) * 5;
+
+select * 
+from member_tbl;
