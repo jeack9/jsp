@@ -1,4 +1,4 @@
-package co.yedam;
+package co.yedam.web;
 
 import java.io.IOException;
 
@@ -16,13 +16,18 @@ public class ModifyForm implements Control {
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-		int currPage = Integer.parseInt(req.getParameter("page"));
+		int page = Integer.parseInt(req.getParameter("page"));
+		String sc = req.getParameter("searchCondition");
+		String kw = req.getParameter("keyword");
+		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.getBoard(boardNo);
 		req.setAttribute("board", board);
-		req.setAttribute("currPage", currPage);
+		req.setAttribute("page", page);
+		req.setAttribute("searchCondition", sc);
+		req.setAttribute("keyword", kw);
 		
-		req.getRequestDispatcher("WEB-INF/view/modifyForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/modifyForm.tiles").forward(req, resp);
 	}
 
 }

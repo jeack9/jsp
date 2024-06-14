@@ -14,12 +14,12 @@ import co.yedam.web.AddBoard;
 import co.yedam.web.AddStudent;
 import co.yedam.web.BoardForm;
 import co.yedam.web.BoardList;
-import co.yedam.web.DeleteBoard;
 import co.yedam.web.GetBoard;
 import co.yedam.web.LoginControl;
 import co.yedam.web.LoginForm;
 import co.yedam.web.Logout;
 import co.yedam.web.MainControl;
+import co.yedam.web.ModifyForm;
 import co.yedam.web.ProductControl;
 import co.yedam.web.RemoveBoard;
 import co.yedam.web.RemoveForm;
@@ -49,7 +49,6 @@ public class FrontController extends HttpServlet{
 		map.put("/addBoard.do", new AddBoard()); //글등록
 		map.put("/removeForm.do", new RemoveForm()); // 글삭제화면
 		map.put("/removeBoard.do", new RemoveBoard()); // 글삭제
-		map.put("/deleteBoard.do", new DeleteBoard());//글삭제
 		map.put("/modifyForm.do", new ModifyForm()); // 글수정화면
 		map.put("/updateBoard.do", new UpdateBoard()); //글수정
 		map.put("/getBoard.do", new GetBoard()); //단건 조회

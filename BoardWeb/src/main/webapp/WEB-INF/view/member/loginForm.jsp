@@ -3,7 +3,6 @@
 <%-- <%@include file="../public/header.jsp"%> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="mytag" %>
-<jsp:include page="../public/header.jsp"/>
 <h3>로그인화면</h3>
 <mytag:line/>
 
@@ -20,5 +19,3 @@
 	  </tr>
 	</table>
 </form>
-<%-- <%@include file="../public/footer.jsp"%> --%>
-<jsp:include page="../public/footer.jsp"/>

@@ -9,11 +9,27 @@
 		from board_tbl
 		order by board_no
 	</select>
-	<select id="boardListPaging" parameterType="int" resultType="co.yedam.vo.BoardVO">
+	<select id="boardListPaging" parameterType="co.yedam.common.SearchVO" resultType="co.yedam.vo.BoardVO">
 		SELECT b.*
 		FROM(SELECT ROWNUM rn, a.*
 		     FROM (SELECT *
 		           FROM board_tbl
+		           WHERE
+		           <choose>
+		           	<when test="searchCondition == 'T'.toString()">
+		           	title like '%'||#{keyword}||'%'
+		           	</when>
+		           	<when test="searchCondition == 'W'.toString()">
+		           	writer like '%'||#{keyword}||'%'
+		           	</when>
+		           	<when test="searchCondition == 'TW'.toString()">
+		           	title like '%'||#{keyword}||'%' 
+		           	OR writer like '%'||#{keyword}||'%'
+		           	</when>
+		           	<otherwise>
+		           	1 = 1
+		           	</otherwise>
+		           </choose>
 		           order by board_no DESC) a
 		     <![CDATA[
 		     where ROWNUM <= (#{page} * 5) ) b
@@ -23,6 +39,20 @@
 	<select id="getTotalCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM board_tbl
+		<where>
+		  <choose>
+			<when test="searchCondition == 'T'.toString()">
+			title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchCondition == 'W'.toString()">
+			writer like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchCondition == 'TW'.toString()">
+			title like '%'||#{keyword}||'%' 
+			OR writer like '%'||#{keyword}||'%'
+			</when>
+		  </choose>
+		</where>
 	</select>
 	<insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
 		insert into board_tbl(board_no, title, content, writer)

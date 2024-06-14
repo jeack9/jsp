@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.yedam.common.DataSource;
+import co.yedam.common.SearchVO;
 import co.yedam.mapper.BoardMapper;
 import co.yedam.vo.BoardVO;
 
@@ -12,13 +13,13 @@ public class BoardServiceImpl implements BoardService {
 	SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 	@Override
-	public List<BoardVO> boardList(int page) {
-		return mapper.boardListPaging(page);
+	public List<BoardVO> boardList(SearchVO search) {
+		return mapper.boardListPaging(search);
 	}
 	
 	@Override
-	public int boardTotal() {
-		return mapper.getTotalCnt();
+	public int boardTotal(SearchVO search) {
+		return mapper.getTotalCnt(search);
 	}
 	
 	@Override

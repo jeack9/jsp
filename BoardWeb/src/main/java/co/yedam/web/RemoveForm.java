@@ -22,7 +22,7 @@ public class RemoveForm implements Control {
 		req.setAttribute("board", board);
 		req.setAttribute("currPage", currPage);
 		
-		req.getRequestDispatcher("WEB-INF/view/removeForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/removeForm.tiles").forward(req, resp);
 	}
 
 }
