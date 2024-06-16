@@ -24,6 +24,7 @@
           </c:when>
           <c:otherwise>
           <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="joinForm.do">회원가입</a>
           </c:otherwise>
         </c:choose>
     </div>
