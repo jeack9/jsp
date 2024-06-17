@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import co.yedam.common.Control;
-import co.yedam.service.BoardService;
-import co.yedam.service.BoardServiceImpl;
+import co.yedam.service.MemberService;
+import co.yedam.service.MemberServiceImpl;
+import co.yedam.vo.MemberVO;
 
 public class LoginControl implements Control {
 
@@ -18,12 +19,15 @@ public class LoginControl implements Control {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		
-		BoardService svc = new BoardServiceImpl();
+		MemberService svc = new MemberServiceImpl();
 		
-		if(svc.checkMember(id, pw)) {
+		MemberVO mvo = svc.checkMember(id, pw);
+		
+		if(mvo != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("logid", id);
-			resp.sendRedirect("main.do");
+			if(mvo.getResponsibility().equals("User")) resp.sendRedirect("main.do");
+			else resp.sendRedirect("memberList.do");
 		}else {
 			resp.sendRedirect("loginForm.do");
 		}

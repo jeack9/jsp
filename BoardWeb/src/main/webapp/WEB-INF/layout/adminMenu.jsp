@@ -1,31 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Sidebar-->
-<div class="border-end bg-white" id="sidebar-wrapper">
-    <c:choose>
-      <c:when test="${!empty logid && logid == 'user99' }">
-      <div class="sidebar-heading border-bottom bg-light">Start Bootstrap(${logid})</div>
-      </c:when>
-      <c:otherwise>
-      <div class="sidebar-heading border-bottom bg-light">Start Bootstrap(Guest)</div>
-      </c:otherwise>
-    </c:choose>
-    <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="main.do">메인페이지</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="studentForm.do">학생정보등록화면</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do?page=1">게시판목록</a>
-        <c:if test="${!empty logid && logid == 'user99'  }">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">게시글등록</a>
-        </c:if>
-        <c:choose>
-          <c:when test="${!empty logid && logid == 'user99' }">
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">유저관리</a>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃</a>
-          </c:when>
-          <c:otherwise>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>
-          </c:otherwise>
-        </c:choose>
-    </div>
-</div>
+<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+	<div class="sb-sidenav-menu">
+		<div class="nav">
+			<div class="sb-sidenav-menu-heading">Core</div>
+			<a class="nav-link" href="index.html">
+				<div class="sb-nav-link-icon">
+					<i class="fas fa-tachometer-alt"></i>
+				</div> Dashboard
+			</a>
+			<div class="sb-sidenav-menu-heading">Interface</div>
+			<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+				data-bs-target="#collapseLayouts" aria-expanded="false"
+				aria-controls="collapseLayouts">
+				<div class="sb-nav-link-icon">
+					<i class="fas fa-columns"></i>
+				</div> Layouts
+				<div class="sb-sidenav-collapse-arrow">
+					<i class="fas fa-angle-down"></i>
+				</div>
+			</a>
+			<div class="collapse" id="collapseLayouts"
+				aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+				<nav class="sb-sidenav-menu-nested nav">
+					<a class="nav-link" href="layout-static.html">Static Navigation</a>
+					<a class="nav-link" href="layout-sidenav-light.html">Light
+						Sidenav</a>
+				</nav>
+			</div>
+			<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+				data-bs-target="#collapsePages" aria-expanded="false"
+				aria-controls="collapsePages">
+				<div class="sb-nav-link-icon">
+					<i class="fas fa-book-open"></i>
+				</div> Pages
+				<div class="sb-sidenav-collapse-arrow">
+					<i class="fas fa-angle-down"></i>
+				</div>
+			</a>
+			<div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+				data-bs-parent="#sidenavAccordion">
+				<nav class="sb-sidenav-menu-nested nav accordion"
+					id="sidenavAccordionPages">
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+						aria-controls="pagesCollapseAuth"> Authentication
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="pagesCollapseAuth"
+						aria-labelledby="headingOne"
+						data-bs-parent="#sidenavAccordionPages">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link" href="login.html">Login</a> <a
+								class="nav-link" href="register.html">Register</a> <a
+								class="nav-link" href="password.html">Forgot Password</a>
+						</nav>
+					</div>
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#pagesCollapseError" aria-expanded="false"
+						aria-controls="pagesCollapseError"> Error
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="pagesCollapseError"
+						aria-labelledby="headingOne"
+						data-bs-parent="#sidenavAccordionPages">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link" href="401.html">401 Page</a> <a
+								class="nav-link" href="404.html">404 Page</a> <a
+								class="nav-link" href="500.html">500 Page</a>
+						</nav>
+					</div>
+				</nav>
+			</div>
+			<div class="sb-sidenav-menu-heading">Addons</div>
+			<a class="nav-link" href="charts.html">
+				<div class="sb-nav-link-icon">
+					<i class="fas fa-chart-area"></i>
+				</div> Charts
+			</a> <a class="nav-link" href="tables.html">
+				<div class="sb-nav-link-icon">
+					<i class="fas fa-table"></i>
+				</div> Tables
+			</a>
+		</div>
+	</div>
+	<div class="sb-sidenav-footer">
+		<div class="small">Logged in as:</div>
+		Start Bootstrap
+	</div>
+</nav>

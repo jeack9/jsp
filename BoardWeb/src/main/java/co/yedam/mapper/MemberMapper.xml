@@ -16,4 +16,10 @@
 		  </otherwise>
 		</choose>
 	</insert>
+	<select id="selectMember" resultType="co.yedam.vo.MemberVO">
+		select *
+		from member_tbl
+		where user_id = #{id}
+		and user_pw = #{pw}
+	</select>
 </mapper>

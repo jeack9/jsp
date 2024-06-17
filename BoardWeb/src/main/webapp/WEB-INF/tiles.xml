@@ -22,7 +22,16 @@
 	<definition name="WILDCARD:board/*" extends="userapp">
 		<put-attribute name="body" value="/WEB-INF/view/board/{1}.jsp"/>
 	</definition>
-	<definition name="WILDCARD:member/*" extends="userapp">
-		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
+	<!-- 관리자용 -->
+	<definition name="adminapp" template="/WEB-INF/layout/adminTemp.jsp">
+		<put-attribute name="title" value="adminTitle"/>
+		<put-attribute name="menu" value="/WEB-INF/layout/adminMenu.jsp"/>
+	</definition>
+	<definition name="WILDCARD:admin/*" extends="adminapp">
+		<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp"/>
+	</definition>
+	
+	<definition name="WILDCARD:*/*" extends="userapp">
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>

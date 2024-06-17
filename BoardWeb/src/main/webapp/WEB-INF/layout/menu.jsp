@@ -14,6 +14,7 @@
     <div class="list-group list-group-flush">
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="main.do">메인페이지</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="studentForm.do">학생정보등록화면</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="script.do">자바스크립트</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do?page=1">게시판목록</a>
         <c:if test="${!empty logid }">
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">게시글등록</a>
