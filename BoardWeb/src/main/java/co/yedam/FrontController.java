@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.common.Control;
 import co.yedam.web.AddBoard;
 import co.yedam.web.AddStudent;
+import co.yedam.web.AjaxForm;
 import co.yedam.web.BoardForm;
 import co.yedam.web.BoardList;
+import co.yedam.web.CheckIdAjax;
+import co.yedam.web.EditAjax;
 import co.yedam.web.GetBoard;
 import co.yedam.web.JoinForm;
 import co.yedam.web.JoinMember;
@@ -21,9 +24,12 @@ import co.yedam.web.LoginControl;
 import co.yedam.web.LoginForm;
 import co.yedam.web.Logout;
 import co.yedam.web.MainControl;
+import co.yedam.web.MemberAddAjax;
+import co.yedam.web.MemberAjax;
 import co.yedam.web.MemberList;
 import co.yedam.web.ModifyForm;
 import co.yedam.web.ProductControl;
+import co.yedam.web.RemoveAjax;
 import co.yedam.web.RemoveBoard;
 import co.yedam.web.RemoveForm;
 import co.yedam.web.ScriptForm;
@@ -70,6 +76,14 @@ public class FrontController extends HttpServlet{
 		
 		// 자바스크립트
 		map.put("/script.do", new ScriptForm());
+		
+		// ajax 연습
+		map.put("/ajax.do", new AjaxForm());
+		map.put("/membersAjax.do", new MemberAjax());
+		map.put("/addAjax.do", new MemberAddAjax());
+		map.put("/checkIdAjax.do", new CheckIdAjax());
+		map.put("/removeAjax.do", new RemoveAjax());
+		map.put("/editAjax.do", new EditAjax());
 	}
 	
 	@Override

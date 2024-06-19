@@ -1,5 +1,7 @@
 package co.yedam.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import co.yedam.common.DataSource;
@@ -19,5 +21,31 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO checkMember(String id, String pw) {
 		return mapper.selectMember(id, pw);
 	}
+
+	@Override
+	public List<MemberVO> memberList() {
+		return mapper.memberList();
+	}
+
+	@Override
+	public boolean insertMemberAjax(MemberVO member) {
+		return mapper.insertMemberAjax(member) == 1;
+	}
+
+	@Override
+	public boolean checkMemberId(String id) {
+		return mapper.selectMemberAjax(id) == 1;
+	}
+
+	@Override
+	public boolean removeMember(String id) {
+		return mapper.deleteMemberAjax(id) == 1;
+	}
+
+	@Override
+	public boolean editMember(MemberVO mvo) {
+		return mapper.updateMemberAjax(mvo) == 1;
+	}
+	
 
 }

@@ -1,7 +1,7 @@
 /**
  * dom1.js 
  */
-document.getElementById("fruit").style.display = "none";
+// document.getElementById("fruit").style.display = "none";
 
 document.querySelector(".table tr:nth-child(5)").setAttribute("align", "center");
 
