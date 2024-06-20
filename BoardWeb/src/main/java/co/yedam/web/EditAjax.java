@@ -12,7 +12,7 @@ import co.yedam.service.MemberServiceImpl;
 import co.yedam.vo.MemberVO;
 
 public class EditAjax implements Control {
-
+	
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");

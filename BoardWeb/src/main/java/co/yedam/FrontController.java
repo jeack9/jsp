@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.common.Control;
 import co.yedam.web.AddBoard;
+import co.yedam.web.AddReply;
 import co.yedam.web.AddStudent;
 import co.yedam.web.AjaxForm;
 import co.yedam.web.BoardForm;
@@ -32,9 +33,11 @@ import co.yedam.web.ProductControl;
 import co.yedam.web.RemoveAjax;
 import co.yedam.web.RemoveBoard;
 import co.yedam.web.RemoveForm;
+import co.yedam.web.RemoveReply;
 import co.yedam.web.ScriptForm;
 import co.yedam.web.StudentForm;
 import co.yedam.web.UpdateBoard;
+import co.yedam.web.replyList;
 
 // front -> 요청 url -> 실행컨트롤 매칭.
 //객체생성 -> init -> service -> destroy
@@ -84,6 +87,11 @@ public class FrontController extends HttpServlet{
 		map.put("/checkIdAjax.do", new CheckIdAjax());
 		map.put("/removeAjax.do", new RemoveAjax());
 		map.put("/editAjax.do", new EditAjax());
+		
+		// 댓글
+		map.put("/replyListJson.do", new replyList()); // 댓글 조회
+		map.put("/removeReply.do", new RemoveReply()); // 댓글 삭제
+		map.put("/addReply.do", new AddReply()); // 댓글 등록
 	}
 	
 	@Override

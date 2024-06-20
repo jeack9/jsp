@@ -121,7 +121,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       <h2>사용자 정보수정</h2>
     </div>
     <div class="modal-body">
-      <p><input type="text" id="modify_id"></p>
+      <p><input type="hidden" id="modify_id"></p>
       <p>이름<input type="text" id="modify_name"></p>
       <p>비밀번호<input type="text" id="modify_pass"></p>
     </div>

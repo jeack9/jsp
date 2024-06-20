@@ -1,48 +1,42 @@
 package co.yedam.common;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
-import co.yedam.mapper.BoardMapper;
-import co.yedam.mapper.StudentMapper;
-import co.yedam.vo.BoardVO;
-import co.yedam.vo.Student;
+import co.yedam.mapper.ReplyMapper;
+import co.yedam.vo.ReplyVO;
 
 public class AppTest {
 	public static void main(String[] args) {
-		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = DataSource.getInstance().openSession(true);
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		
-		// interface - 구현객체.
-		StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
 		
-		Student std = new Student();
-		std.setStdNo("S0030");
-		std.setStdName("안녕하세요");
-		std.setPhone("010-000-000");
-		std.setBldType("B");
-//		sqlSession.insert("co.yedam.mapper.StudentMapper.insertStudent", std);
-//		mapper.insertStudent(std);
+		// interface에 구현해 메소드가 하나만 있는 인터페이스: 함수형 인터페이스
+//		mapper.selectList(201).forEach(new Consumer<ReplyVO>() {
+//			public void accept(ReplyVO t) {
+//				System.out.println(t);
+//			};
+//		});
+		// 위에 표현식을 람다표현식으로 변경
+		mapper.selectList(201).forEach(reply -> System.out.println(reply));
+//		
+//		ReplyVO rvo = mapper.selectReplay(2);
+//		System.out.println(rvo);
 		
-		std.setPhone("123-000-789");
-//		sqlSession.update("co.yedam.mapper.StudentMapper.updateStudent", std);
-		mapper.updateStudent(std);
-		mapper.deleteStudent(std);
-		sqlSession.commit();
+		ReplyVO rvo = new ReplyVO();
+		rvo.setReply("댓글테스트");
+		rvo.setReplier("admin");
+		rvo.setBoardNo(201);
 		
-		List<Student> list = 
-							 //sqlSession.selectList("co.yedam.mapper.StudentMapper.selectStudent");
-							 mapper.selectStudent();
-		for(Student ele : list) {
-			System.out.println(ele.toString());
+		try {
+			if(mapper.insertReply(rvo) == 1) {
+				System.out.println("입력성공");
+			}
+		} catch (Exception e) {
+			System.out.println("예외발생.");
 		}
-		
-		BoardMapper bmapper = sqlSession.getMapper(BoardMapper.class);
-//		List<BoardVO> boardList = bmapper.boardListPaging(3);
-//		for(BoardVO ele : boardList) {
-//			System.out.println(ele.toString());
-//		}
+		mapper.selectList(201).forEach(reply -> System.out.println(reply));
 	}
 }
