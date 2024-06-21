@@ -30,12 +30,14 @@ import co.yedam.web.MemberAjax;
 import co.yedam.web.MemberList;
 import co.yedam.web.ModifyForm;
 import co.yedam.web.ProductControl;
+import co.yedam.web.PublicData;
 import co.yedam.web.RemoveAjax;
 import co.yedam.web.RemoveBoard;
 import co.yedam.web.RemoveForm;
 import co.yedam.web.RemoveReply;
 import co.yedam.web.ScriptForm;
 import co.yedam.web.StudentForm;
+import co.yedam.web.TotalCnt;
 import co.yedam.web.UpdateBoard;
 import co.yedam.web.replyList;
 
@@ -92,6 +94,10 @@ public class FrontController extends HttpServlet{
 		map.put("/replyListJson.do", new replyList()); // 댓글 조회
 		map.put("/removeReply.do", new RemoveReply()); // 댓글 삭제
 		map.put("/addReply.do", new AddReply()); // 댓글 등록
+		map.put("/replyTotalCnt.do", new TotalCnt()); // 댓글 전체 수
+		
+		// 공공데이터
+		map.put("/publicData.do", new PublicData());
 	}
 	
 	@Override

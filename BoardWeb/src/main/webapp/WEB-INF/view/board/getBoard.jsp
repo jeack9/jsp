@@ -20,6 +20,31 @@
   div.reply span {
   	display: inline-block;
   }
+  /* 페이징 css */
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 <h1>상세화면</h1>
 <h1>${requestScope.board.boardNo}. ${requestScope.board.title}</h1>
@@ -64,6 +89,16 @@
   	  	<span class="col-sm-1"><button class="btn btn-danger" onclick="deleteRow(event)">삭제</button></span>
   	  </li>
   	</ul>
+  </div> <!-- end div.content -->
+  <div class="footer"> <!-- 댓글 페이징 영역 -->
+  	<div class="center">
+  	  <div class="pagination">
+  	  	<!-- <a href="#">1</a>
+  	  	<a href="#" class="active">2</a>
+  	  	<a href="#">3</a>
+  	  	<a href="#">4</a> -->
+  	  </div>
+  	</div>
   </div>
 </div> <!-- end .reply -->
 <!-- 댓글관련 끝. -->

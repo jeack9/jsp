@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import co.yedam.mapper.ReplyMapper;
 import co.yedam.vo.ReplyVO;
 
-public class AppTest {
+public class AppTest {	
 	public static void main(String[] args) {
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
@@ -37,6 +37,8 @@ public class AppTest {
 		} catch (Exception e) {
 			System.out.println("예외발생.");
 		}
-		mapper.selectList(201).forEach(reply -> System.out.println(reply));
+//		mapper.selectList(201).forEach(reply -> System.out.println(reply));
+		
+		mapper.selectListPaging(182, 2).forEach(reply -> System.out.println(reply.toString()));
 	}
 }

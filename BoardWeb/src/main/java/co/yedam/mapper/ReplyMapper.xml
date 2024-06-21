@@ -13,6 +13,16 @@
 		from reply_tbl
         where board_no = #{boardNo}
 	</select>
+	<select id="selectListPaging">
+		SELECT b.*
+		FROM (SELECT /*+INDEX_DESC(r REPLY_PK)*/ ROWNUM rn, r.*
+      		  FROM reply_tbl r
+      		  WHERE board_no = #{boardNo}) b
+        <![CDATA[
+        WHERE b.rn <= #{page} * 5
+        ]]>
+        AND   b.rn > (#{page} - 1) * 5
+	</select>
 	<select id="selectReplay" parameterType="int">
 		select reply_no,
 		       reply,
@@ -33,4 +43,10 @@
 		delete from reply_tbl
 		where reply_no = #{reply_no}
 	</delete>
+	
+	<select id="selectReplyCnt" parameterType="int">
+		select count(1)
+		from reply_tbl
+		where board_no = #{boardNo}
+	</select>
 </mapper>
