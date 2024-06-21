@@ -77,5 +77,30 @@ FROM(SELECT ROWNUM rn, a.*
      where ROWNUM <= (:page * 5) ) b
 WHERE b.rn > (:page - 1) * 5;
 
-select * 
-from member_tbl;
+DROP TABLE reply_tbl PURGE;
+DROP SEQUENCE reply_seq;
+-- 댓글테이블
+CREATE TABLE reply_tbl(
+  reply_no NUMBER,
+  reply VARCHAR2(300) NOT NULL,
+  replier VARCHAR2(10) NOT NULL,
+  reply_date DATE DEFAULT SYSDATE,
+  board_no NUMBER NOT NULL
+);  
+ALTER TABLE reply_tbl ADD CONSTRAINT reply_pk PRIMARY KEY(reply_no);
+CREATE SEQUENCE reply_seq;
+INSERT INTO reply_tbl (reply_no, reply, replier, board_no)
+VALUES (reply_seq.nextval, 'ㅎㅇ', 'user01', 182);
+
+-- 댓글 페이징 프라이머리키 인덱스를 이용
+SELECT /*+INDEX_DESC(r REPLY_PK)*/ ROWNUM rn, r.*
+FROM reply_tbl r;
+
+SELECT b.*
+FROM (SELECT /*+INDEX(r REPLY_PK)*/ ROWNUM rn, r.*
+      FROM reply_tbl r
+      WHERE board_no = 182) b
+WHERE b.rn <= (:page) * 5
+AND   b.rn > (:page - 1) * 5;
+
+select count(*) from reply_tbl;
