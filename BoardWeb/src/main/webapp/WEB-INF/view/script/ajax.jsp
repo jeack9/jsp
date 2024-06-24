@@ -92,6 +92,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
                        </select></td>
     </tr>
     <tr>
+      <th>사진</th><td><input type="file" id="myPic"></td>
+    </tr>
+    <tr>
       <td colspan="2"><button id="addBtn" class="btn btn-success">등록</button></td>
     </tr>
   </table>

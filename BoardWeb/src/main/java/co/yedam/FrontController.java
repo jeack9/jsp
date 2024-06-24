@@ -16,6 +16,9 @@ import co.yedam.web.AddStudent;
 import co.yedam.web.AjaxForm;
 import co.yedam.web.BoardForm;
 import co.yedam.web.BoardList;
+import co.yedam.web.CenterChart;
+import co.yedam.web.CenterInfo;
+import co.yedam.web.ChartForm;
 import co.yedam.web.CheckIdAjax;
 import co.yedam.web.EditAjax;
 import co.yedam.web.GetBoard;
@@ -25,6 +28,7 @@ import co.yedam.web.LoginControl;
 import co.yedam.web.LoginForm;
 import co.yedam.web.Logout;
 import co.yedam.web.MainControl;
+import co.yedam.web.MapForm;
 import co.yedam.web.MemberAddAjax;
 import co.yedam.web.MemberAjax;
 import co.yedam.web.MemberList;
@@ -74,6 +78,7 @@ public class FrontController extends HttpServlet{
 		map.put("/logout.do", new Logout()); //로그아웃
 		//회원가입
 		map.put("/joinForm.do", new JoinForm());// 회원가입화면
+		// 파일업로드
 		map.put("/joinMember.do", new JoinMember()); // 회원가입
 		
 		//관리자용
@@ -98,6 +103,16 @@ public class FrontController extends HttpServlet{
 		
 		// 공공데이터
 		map.put("/publicData.do", new PublicData());
+		
+		// 카카오맵 
+		map.put("/map.do", new MapForm());
+		
+		// json 문자열 -> db insert
+		map.put("/centerInfo.do", new CenterInfo());
+		
+		// 센터 차트
+		map.put("/chartForm.do", new ChartForm());
+		map.put("/centerChart.do", new CenterChart());
 	}
 	
 	@Override

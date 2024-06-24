@@ -7,6 +7,7 @@ CREATE TABLE member_tbl(
   user_name VARCHAR2(100) NOT NULL,
   responsibility VARCHAR2(10) DEFAULT 'User' -- User/Admin
 );
+ALTER TABLE member_tbl add image VARCHAR2(100);
 INSERT INTO member_tbl(user_id, user_pw, user_name)
 VALUES ('user01', '1111', '홍길동');
 INSERT INTO member_tbl(user_id, user_pw, user_name)
@@ -17,7 +18,7 @@ INSERT INTO member_tbl(user_id, user_pw, user_name, responsibility)
 VALUES ('user99', '1111', '최민수', 'Admin');
 
 SELECT *
-FROM member_tbl; 
+FROM member_tbl;
 
 CREATE TABLE board_tbl(
   board_no NUMBER,
@@ -103,4 +104,19 @@ FROM (SELECT /*+INDEX(r REPLY_PK)*/ ROWNUM rn, r.*
 WHERE b.rn <= (:page) * 5
 AND   b.rn > (:page - 1) * 5;
 
-select count(*) from reply_tbl;
+-- 센터정보 등록
+CREATE TABLE center_tbl(
+  id VARCHAR2(5),
+  center_name VARCHAR2(200),
+  sido VARCHAR2(100),
+  phone_number VARCHAR2(20),
+  address VARCHAR2(200)
+);
+insert into center_tbl (id, center_name, sido, phone_number, address)
+select '1', 'cn1', 'sido1', 'pn1', 'addr1'  from dual union all
+select '3', 'cn3', 'sido3', 'pn3', 'addr3'  from dual union all
+select '2', 'cn2', 'sido2', 'pn2', 'addr2'  from dual;
+-- 시도별 차트
+select sido, count(1)
+from center_tbl
+GROUP by sido;

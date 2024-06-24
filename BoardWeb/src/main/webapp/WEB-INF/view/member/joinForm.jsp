@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <h3>회원가입</h3>
-<form action="joinMember.do" method="get">
+<form action="joinMember.do" method="post" enctype="multipart/form-data">
 	<table class="table">
 	  <tr>
 	  	<th>아이디</th>
@@ -21,7 +21,11 @@
 	  	<td><input type="text" name="responsibility"></td>
 	  </tr>
 	  <tr>
-	    <td colspan="1" align="center">
+	  	<th>이미지</th>
+	  	<td><input type="file" name="myImage"></td>
+	  </tr>
+	  <tr>
+	    <td colspan="2" align="center">
 	  	  <input type="submit" class="btn btn-primary" value="가입">
 	    </td>
 	  </tr>

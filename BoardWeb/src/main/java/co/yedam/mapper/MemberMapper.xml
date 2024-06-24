@@ -7,12 +7,12 @@
 	<insert id="insertMember" parameterType="co.yedam.vo.MemberVO">
 		<choose>
 		  <when test="responsibility.length() == 0">
-			insert into member_tbl(user_id, user_pw, user_name)
-			values (#{userId}, #{userPw}, #{userName})
+			insert into member_tbl(user_id, user_pw, user_name, image)
+			values (#{userId}, #{userPw}, #{userName}, #{image})
 		  </when>
 		  <otherwise>
-		  	insert into member_tbl(user_id, user_pw, user_name, responsibility)
-		  	values (#{userId}, #{userPw}, #{userName}, 'Admin')
+		  	insert into member_tbl(user_id, user_pw, user_name, image, responsibility)
+		  	values (#{userId}, #{userPw}, #{userName}, #{image}, 'Admin')
 		  </otherwise>
 		</choose>
 	</insert>

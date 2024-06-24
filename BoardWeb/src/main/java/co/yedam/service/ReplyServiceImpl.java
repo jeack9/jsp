@@ -1,9 +1,11 @@
 package co.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import co.yedam.common.CenterVO;
 import co.yedam.common.DataSource;
 import co.yedam.mapper.ReplyMapper;
 import co.yedam.vo.ReplyVO;
@@ -41,6 +43,16 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int getTotalCnt(int bno) {
 		return mapper.selectReplyCnt(bno);
+	}
+
+	@Override
+	public int createCenterInfo(CenterVO[] arr) {
+		return mapper.insertCenter(arr);
+	}
+
+	@Override
+	public List<Map<String, Object>> centerList() {
+		return mapper.centerBySido();
 	}
 
 }

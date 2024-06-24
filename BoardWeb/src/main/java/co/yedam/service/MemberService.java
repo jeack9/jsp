@@ -5,7 +5,10 @@ import java.util.List;
 import co.yedam.vo.MemberVO;
 
 public interface MemberService {
-	boolean joinMember(MemberVO member);
+//	boolean joinMember(MemberVO member);
+	
+	// 파일첨부 회원등록.
+	boolean joinMemberImage(MemberVO mvo);
 
 	MemberVO checkMember(String id, String pw);
 	

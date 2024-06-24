@@ -12,10 +12,10 @@ public class MemberServiceImpl implements MemberService{
 	SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 	
-	@Override
-	public boolean joinMember(MemberVO member) {
-		return mapper.insertMember(member) == 1;
-	}
+//	@Override
+//	public boolean joinMember(MemberVO member) {
+//		return mapper.insertMember(member) == 1;
+//	}
 
 	@Override
 	public MemberVO checkMember(String id, String pw) {
@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean editMember(MemberVO mvo) {
 		return mapper.updateMemberAjax(mvo) == 1;
+	}
+
+	@Override
+	public boolean joinMemberImage(MemberVO mvo) {
+		return mapper.insertMember(mvo) == 1;
 	}
 	
 
