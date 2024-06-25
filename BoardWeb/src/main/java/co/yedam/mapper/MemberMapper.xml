@@ -5,16 +5,8 @@
   
 <mapper namespace="co.yedam.mapper.MemberMapper">
 	<insert id="insertMember" parameterType="co.yedam.vo.MemberVO">
-		<choose>
-		  <when test="responsibility.length() == 0">
-			insert into member_tbl(user_id, user_pw, user_name, image)
-			values (#{userId}, #{userPw}, #{userName}, #{image})
-		  </when>
-		  <otherwise>
-		  	insert into member_tbl(user_id, user_pw, user_name, image, responsibility)
-		  	values (#{userId}, #{userPw}, #{userName}, #{image}, 'Admin')
-		  </otherwise>
-		</choose>
+		insert into member_tbl(user_id, user_pw, user_name, image, responsibility)
+		values (#{userId}, #{userPw}, #{userName}, #{image}, #{responsibility})
 	</insert>
 	<select id="selectMember" resultType="co.yedam.vo.MemberVO">
 		select *

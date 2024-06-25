@@ -10,8 +10,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import co.yedam.common.Control;
-import co.yedam.service.BoardService;
-import co.yedam.service.BoardServiceImpl;
 import co.yedam.service.MemberService;
 import co.yedam.service.MemberServiceImpl;
 import co.yedam.vo.MemberVO;
@@ -25,7 +23,7 @@ public class JoinMember implements Control {
 		String savePath = req.getServletContext().getRealPath("images");
 		int maxSize = 1024 * 1024 * 5; // 5mb
 		String encoding = "utf-8";
-		
+		System.out.println(savePath + "세이브패스");
 		MultipartRequest mr = new MultipartRequest(req, savePath, maxSize, encoding, new DefaultFileRenamePolicy());
 		
 		MemberService svc = new MemberServiceImpl();
@@ -35,6 +33,7 @@ public class JoinMember implements Control {
 		String userName = mr.getParameter("userName");
 		String respons = mr.getParameter("responsibility");
 		String img = mr.getFilesystemName("myImage");
+		img = img == null ? "test.jpg" : img;
 				
 		MemberVO member = new MemberVO(userId, userPw, userName, respons, img);
 		
@@ -42,10 +41,12 @@ public class JoinMember implements Control {
 			if(svc.joinMemberImage(member)) {
 //			req.setAttribute("message", "가입 성공..");
 //			resp.sendRedirect("loginForm.do");
-				resp.sendRedirect("memberList.do");
+				if(req.getMethod().equals("POST")) resp.sendRedirect("memberList.do");
+				else if(req.getMethod().equals("PUT")) resp.getWriter().print("{\"retCode\": \"OK\"}");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			if(req.getMethod().equals("PUT")) resp.getWriter().print("{\"retCode\": \"NG\"}");
 		}
 		
 	}

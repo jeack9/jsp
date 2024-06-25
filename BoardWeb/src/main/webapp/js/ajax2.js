@@ -6,7 +6,7 @@ let xhtp = new XMLHttpRequest();
 xhtp.open("get", "membersAjax.do");
 xhtp.send();
 xhtp.onload = () =>{
-    console.log(xhtp);
+    // console.log(xhtp);
     let data = JSON.parse(xhtp.responseText);
     data.forEach(user => {
         document.querySelector("#list").appendChild(makeRow(user));
@@ -14,7 +14,7 @@ xhtp.onload = () =>{
 }
 
 // 행 반환 함수
-let fields = ["userId", "userName", "userPw", "responsibility"];
+let fields = ["userId", "userName", "userPw", "responsibility", "image"];
 function makeRow(obj = {id, first_name, email, gender}){
     let tr = document.createElement("tr");
     tr.setAttribute("id", obj.userId);
@@ -26,7 +26,15 @@ function makeRow(obj = {id, first_name, email, gender}){
     });
     fields.forEach(field =>{
         let td = document.createElement("td");
-        td.innerHTML = obj[field];
+        if(field == "image") { // 유저 이미지 
+            if(obj.image === undefined) obj.image = "test.jpg";
+            let img = document.createElement("img");
+            img.setAttribute("src", `images/${obj.image}`);
+            img.setAttribute("width", "100");
+            td.appendChild(img);  
+        }else{
+            td.innerHTML = obj[field];
+        }
         tr.appendChild(td);
     });
     let td = document.createElement("td");
@@ -83,7 +91,40 @@ document.querySelector("#modBtn").addEventListener("click", function(){
 });
 
 // 추가 버튼 이벤트 (행 추가)
-document.querySelector("#addBtn").addEventListener("click", () => {
+document.querySelector("#addBtn").addEventListener("click", () =>{
+    const formData = new FormData();
+    const fileField = document.querySelector('input[type="file"]');
+    
+    formData.append("userId", document.querySelector("#uid").value);
+    formData.append("userPw", document.querySelector("#upw").value);
+    formData.append("userName", document.querySelector("#uname").value);
+    formData.append("responsibility", document.querySelector("#duty").value);
+    formData.append("myImage", fileField.files[0]);
+    
+    upload(formData);
+});
+async function upload(formData) {
+    try {
+      const response = await fetch("joinMember.do", {
+        method: "PUT",
+        body: formData,
+      });
+      const result = await response.json();
+    //   console.log("성공:", result);
+      if(result.retCode == "OK"){
+        let response = await fetch("membersAjax.do");
+        let result = await response.json();
+        document.querySelector("#list").innerHTML = "";
+        result.forEach(user => {
+            document.querySelector("#list").appendChild(makeRow(user));
+        });
+      }
+    } catch (error) {
+      console.error("실패:", error);
+    }
+}
+//(행 추가)
+function addMemberFnc(){
     let id = document.querySelector("#uid").value;
     let pw = document.querySelector("#upw").value;
     let name = document.querySelector("#uname").value;
@@ -103,7 +144,7 @@ document.querySelector("#addBtn").addEventListener("click", () => {
             alert("실패");
         }
     }
-});
+}
 
 // id 체크 이벤트
 document.querySelector('#uid').addEventListener("change", function(){

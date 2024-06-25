@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import co.yedam.common.Control;
 import co.yedam.service.MemberService;
@@ -24,17 +25,9 @@ public class MemberAjax implements Control {
 		
 		MemberService svc = new MemberServiceImpl();
 		List<MemberVO> list = svc.memberList();
-		String json = "[";
-		int idx = 0;
-		for(MemberVO member : list) {
-			json += "{\"userId\":\"" + member.getUserId() + "\"," + "\"userName\":\"" + member.getUserName() + "\"," + "\"userPw\":\"" + member.getUserPw()
-					+  "\"," + "\"responsibility\":\"" + member.getResponsibility() + "\"}";
-			if(idx < list.size() - 1) {
-				json += ",";
-			}
-			idx++;
-		}
-		json += "]";
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(list);
+
 		resp.getWriter().print(json);
 	}
 
