@@ -1,0 +1,57 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+    <form name="updatefrm" th:object="${emp}">
+      <h1>update emp</h1>
+      <div>
+        <label for="employeeId">사원번호</label>
+        <input type="text" th:field="*{employeeId}" />
+      </div>
+      <div><label for="lastName">이름</label> <input type="text" th:field="*{lastName}" /></div>
+      <div><label for="email">이메일</label> <input type="email" th:field="*{email}" /></div>
+      <div><label for="hireDate">입사일</label> <input type="date" th:field="*{hireDate}" /></div>
+      <div><label for="jobId">업무</label> <input type="text" th:field="*{jobId}" /></div>
+      <div><label for="salary">급여</label> <input type="text" th:field="*{salary}" /></div>
+      <div>
+        <button type="button" id="updateBtn">저장</button>
+      </div>
+    </form>
+    <script>
+      const contextPath = $("meta[name='contextPath']").attr("value");
+      // 수정이벤트 핸들러
+      const updateAjax = (e) => {
+        // 1) 보낼 데이터 가져오기
+        let dataObj = getFormData();
+        console.log("obj", dataObj);
+        console.log(JSON.stringify(dataObj), "json");
+        // 2) ajax
+        $.ajax(`${contextPath}/emp/empUpdateJson`, {
+          type: "POST",
+          contentType: "application/json",
+          // data: dataObj,
+          data: JSON.stringify(dataObj),
+        })
+          .done((result) => console.log(result))
+          .fail((err) => console.log(err));
+      };
+
+      const getFormData = () => {
+        // let formData = {};
+        // $("form[name=updatefrm] input").each((idx, input) => {
+        //   formData[$(input).attr("id")] = $(input).val();
+        // });
+
+        let formArr = $("form[name=updatefrm]").serializeArray();
+        let formObj = {};
+        $.each(formArr, (idx, tag) => {
+          formObj = { ...formObj, [tag.name]: tag.value };
+          // formObj[tag.name] = tag.value;
+        });
+        return formObj;
+      };
+
+      // 수정클릭 이벤트
+      $("#updateBtn").on("click", updateAjax);
+    </script>
+</div>

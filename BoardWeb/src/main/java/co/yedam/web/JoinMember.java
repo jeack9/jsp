@@ -20,11 +20,13 @@ public class JoinMember implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 파일첨부일 경우에는 multipart 요청을 처리.
 		// Multipart 요청(1.요청정보, 2.저장위치, 3.최대크기, 4.인코딩방식, 5.리네임정책)
-		String savePath = req.getServletContext().getRealPath("images");
+		String savePath = "C:\\Users\\admin\\git\\jsp\\BoardWeb\\src\\main\\webapp\\images";
 		int maxSize = 1024 * 1024 * 5; // 5mb
 		String encoding = "utf-8";
-		System.out.println(savePath + "세이브패스");
 		MultipartRequest mr = new MultipartRequest(req, savePath, maxSize, encoding, new DefaultFileRenamePolicy());
+		savePath = req.getServletContext().getRealPath("images");
+		System.out.println(savePath + "세이브패스");
+//		MultipartRequest mr = new MultipartRequest(req, savePath, maxSize, encoding, new DefaultFileRenamePolicy());
 		
 		MemberService svc = new MemberServiceImpl();
 		

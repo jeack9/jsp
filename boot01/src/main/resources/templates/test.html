@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- thymeleaf 태그 -->
+<th:block th:each="number : ${#numbers.sequence(1,5)}">
+  <p th:text="${number}"/>
+</th:block>
+
+<a th:href="@{/emp/empList}" th:text="|전체조회|"></a>
+<hr>
+<p>[[ ${empInfo} ]]</p>
+<p th:id="${empInfo.employeeId}" th:name="${empInfo.lastName}">[[| ${empInfo.jobId} , ${empInfo.departmentId}|]]</p>
+</body>
+</html>

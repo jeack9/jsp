@@ -1,0 +1,38 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+	<h1>리스트 emp</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>No.</th>
+				<th>사원번호</th>
+				<th>이름</th>
+				<th>입사일</th>
+				<th>업무</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="emp, empState : ${emps}">
+				<!--/* <tr th:onclick="|location.href='@{/emp/empInfo(empId=${emp.employeeId})}'|"> */-->
+				<tr>
+					<td>[[ ${empState.count} ]]</td>
+					<td>[[ ${emp.employeeId} ]]</td>
+					<td>[[ ${emp.lastName} ]]</td>
+					<td>[[ ${#dates.format(emp.hireDate, 'yyyy-MM-dd')} ]]</td>
+					<td>[[ ${emp.jobId} ]]</td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+	<script>
+		const contextPath = $("meta[name='contextPath']").attr("value"); 
+		$("tbody > tr").on("click", (e) => {
+			let eid = $(e.currentTarget).children().eq(1).text();
+			let url = `${contextPath}/emp/empInfo?employeeId=${eid}`;
+			//console.log(url);
+			location.href = url;
+		});
+	</script>
+</div>
