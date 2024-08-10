@@ -16,7 +16,6 @@ public class FirstServlet extends HttpServlet {
     public FirstServlet() {
         super();
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter(); // 출력스트림(사용자의 웹브라우저)

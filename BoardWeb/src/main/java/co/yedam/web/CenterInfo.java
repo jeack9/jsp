@@ -29,10 +29,10 @@ public class CenterInfo implements Control {
 		ObjectMapper objectMapper = new ObjectMapper();
 		CenterVO[] centers = objectMapper.readValue(json, CenterVO[].class);
 		
-		ReplyService svc = new ReplyServiceImpl();
-		int r = svc.createCenterInfo(centers);
+//		ReplyService svc = new ReplyServiceImpl();
+//		int r = svc.createCenterInfo(centers);
 		// {"txnCnt" : 3}
-		resp.getWriter().print("{\"txnCnt\" : " + r + "}");
+//		resp.getWriter().print("{\"txnCnt\" : " + r + "}");
 	}
 
 }

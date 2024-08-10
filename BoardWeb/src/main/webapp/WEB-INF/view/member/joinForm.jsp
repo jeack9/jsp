@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <h3>회원가입</h3>
 <form action="joinMember.do" method="post" enctype="multipart/form-data">
 	<table class="table">
