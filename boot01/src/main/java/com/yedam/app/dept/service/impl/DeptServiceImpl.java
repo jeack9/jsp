@@ -1,7 +1,7 @@
 package com.yedam.app.dept.service.impl;
 
-import com.yedam.app.dept.mapper.DeptMapper;
+import com.yedam.app.dept.service.DeptService;
 
-public class DeptServiceImpl implements DeptMapper{
+public class DeptServiceImpl implements DeptService{
 
 }
