@@ -1,0 +1,47 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+    <form name="updatefrm" th:object="${dept}">
+      <h1>update dept</h1>
+      <div>
+        <label for="departmentId">부서번호</label>
+        <input type="text" th:field="*{departmentId}" readonly />
+      </div>
+      <div><label for="departmentName">부서명</label> <input type="text" th:field="*{departmentName}"  /></div>
+      <div><label for="managerId">관리자</label> <input type="text" th:field="*{managerId}" /></div>
+      <div><label for="locationId">위치</label> <input type="text" th:field="*{locationId}" /></div>
+      <div>
+        <button type="button" id="updateBtn">저장</button>
+      </div>
+    </form>
+    <script>
+      const contextPath = $("meta[name='contextPath']").attr("value");
+      // 수정이벤트 핸들러
+      const updateAjax = (e) => {
+        // 1) 보낼 데이터 가져오기
+        let dataObj = getFormData();
+        // 2) ajax
+        $.ajax(`${contextPath}/deptUpdateJson`, {
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(dataObj),
+        })
+          .done((result) => console.log(result))
+          .fail((err) => console.log(err));
+      };
+
+      const getFormData = () => {
+        let formArr = $("form[name=updatefrm]").serializeArray();
+        let formObj = {};
+        $.each(formArr, (idx, tag) => {
+          formObj = { ...formObj, [tag.name]: tag.value };
+          // formObj[tag.name] = tag.value;
+        });
+        return formObj;
+      };
+
+      // 수정클릭 이벤트
+      $("#updateBtn").on("click", updateAjax);
+    </script>
+</div>

@@ -1,0 +1,35 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+	<!--/* <form th:action="@{/emp/empInsert}" method="POST" onsubmit="return valid()"> */-->
+	<form th:action="@{/deptInsert}" method="POST" name="insertForm">
+		<h1>insert dept</h1>
+		<div>
+			<label for="dname">이름</label> <input type="text" id="dname"
+				name="departmentName" />
+		</div>
+		<div>
+			<label for="dmanager">관리자번호</label> <input type="text" id="dmanager"
+				name="managerId" />
+		</div>
+		<div>
+			<label for="dlocation">위치</label> <input type="text" id="dlocation"
+				name="locationId" />
+		</div>
+		<div>
+			<button type="submit">등록</button>
+		</div>
+	</form>
+	<script>
+		$("form[name='insertForm']").on("submit", insertHandler);
+		function insertHandler(e) {
+			e.preventDefault();
+			if (!$("#dname").val()) {
+				alert("부서명을 입력하세요.");
+				return;
+			}
+			insertForm.submit();
+		}
+	</script>
+</div>
