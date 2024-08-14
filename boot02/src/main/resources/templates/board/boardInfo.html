@@ -1,0 +1,54 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+	<h1>게시글 정보</h1>
+	<div class="mb-3 row">
+		<label for="staticBno" class="col-sm-2 col-form-label">No.</label>
+		<div class="col-sm-10">
+			<input type="text" readonly class="form-control-plaintext"
+				id="staticBno" th:field="${board.bno}">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="staticTitle" class="col-sm-2 col-form-label">제목.</label>
+		<div class="col-sm-10">
+			<input type="text" readonly class="form-control-plaintext"
+				id="staticTitle" th:field="${board.title}">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="staticWriter" class="col-sm-2 col-form-label">작성자.</label>
+		<div class="col-sm-10">
+			<input type="text" readonly class="form-control-plaintext"
+				id="staticWriter" th:field="${board.writer}">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="staticContent" class="col-sm-2 col-form-label">내용.</label>
+		<div class="col-sm-10">
+			<input type="text" readonly class="form-control-plaintext"
+				id="staticContent" th:field="${board.contents}">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label class="col-sm-2 col-form-label">첨부파일.</label>
+		<div class="col-sm-10">
+			<img alt="" th:src="${board.image} ? @{/images/{imageName}(imageName=${board.image})}: ''" width="100">
+			<!-- @{/images/{fileName}(fileName=${board.image})} 동적경로 설정 pathVariable 클라이언트 요청시 사용가능 -->
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="staticRegdate" class="col-sm-2 col-form-label">작성일자.</label>
+		<div class="col-sm-10">
+			<input type="text" readonly class="form-control-plaintext"
+				id="staticRegdate" th:field="${board.regdate}">
+		</div>
+	</div>
+	<div class="text-center">
+		<button class="btn btn-info" th:onclick="|location.href='@{/boardUpdate(bno=${board.bno})}'|">수정</button>
+		<button th:onclick="|location.href='@{/boardList}'|">목록</button>
+		<button th:onclick="|location.href='@{/boardDelete(bno=${board.bno})}'|">삭제</button>
+	</div>
+</div>
+

@@ -1,0 +1,58 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+	<div class="container text-center">
+		<form th:action="@{/boardInsert}" method="post" name="boardfrm">
+			<h1>리스트 board</h1>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="title"></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td><input type="text" name="writer"></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><input type="text" name="contents"></td>
+					</tr>
+					<tr>
+						<th>등록일자</th>
+						<td><input type="date" name="regdate"></td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td><input type="file" name="image"></td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-success" type="button" id="addBtn">저장</button>
+		</form>
+	</div>
+	<script>
+	$("#addBtn").on("click", (e)=> {
+		let $title = $("input[name=title]");
+		let $writer = $("input[name=writer]");
+		let $regdate = $("input[name=regdate]");
+		if(!$title.val()){
+			alert("제목 입력해주세요.");
+			$title.focus();
+			return;
+		}
+		if(!$writer.val()){
+			alert("작성자 입력해주세요.");
+			$writer.focus();
+			return;
+		}
+		if(!$regdate.val()){
+			alert("등록일 입력해주세요.");
+			$regdate.focus();
+			return;
+		}
+		boardfrm.submit();
+	});
+</script>
+</div>
