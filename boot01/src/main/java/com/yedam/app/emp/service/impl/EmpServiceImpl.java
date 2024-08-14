@@ -11,6 +11,8 @@ import com.yedam.app.emp.mapper.EmpMapper;
 import com.yedam.app.emp.service.EmpService;
 import com.yedam.app.emp.service.EmpVO;
 
+import lombok.AllArgsConstructor;
+
 @Service
 public class EmpServiceImpl implements EmpService{
 	
